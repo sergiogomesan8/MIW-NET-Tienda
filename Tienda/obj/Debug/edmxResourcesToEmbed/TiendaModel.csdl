@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TiendaPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Pedido">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Importe" Type="Double" Nullable="false" />
+    <Property Name="NombreCliente" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="FechaCompra" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Ventas" Relationship="TiendaPModel.PedidoVenta" FromRole="Pedido" ToRole="Venta" />
+  </EntityType>
+  <EntityType Name="Producto">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Cantidad" Type="Int32" Nullable="false" />
+    <Property Name="Precio" Type="Double" Nullable="false" />
+    <Property Name="Imagen" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Ventas" Relationship="TiendaPModel.ProductoVenta" FromRole="Producto" ToRole="Venta" />
+    <NavigationProperty Name="Stocks" Relationship="TiendaPModel.ProductoStock" FromRole="Producto" ToRole="Stock" />
+  </EntityType>
+  <EntityType Name="Stock">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReStock" Type="Boolean" Nullable="false" />
+    <Property Name="ProductoId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Producto" Relationship="TiendaPModel.ProductoStock" FromRole="Stock" ToRole="Producto" />
+  </EntityType>
+  <EntityType Name="Venta">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Cantidad" Type="Double" Nullable="false" />
+    <Property Name="PedidoId" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="ProductoId" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Pedido" Relationship="TiendaPModel.PedidoVenta" FromRole="Venta" ToRole="Pedido" />
+    <NavigationProperty Name="Producto" Relationship="TiendaPModel.ProductoVenta" FromRole="Venta" ToRole="Producto" />
+  </EntityType>
+  <EntityContainer Name="TiendaPEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Pedidos" EntityType="Self.Pedido" />
+    <EntitySet Name="Productos" EntityType="Self.Producto" />
+    <EntitySet Name="Stocks" EntityType="Self.Stock" />
+    <EntitySet Name="Ventas" EntityType="Self.Venta" />
+    <AssociationSet Name="PedidoVenta" Association="TiendaPModel.PedidoVenta">
+      <End Role="Pedido" EntitySet="Pedidos" />
+      <End Role="Venta" EntitySet="Ventas" />
+    </AssociationSet>
+    <AssociationSet Name="ProductoVenta" Association="TiendaPModel.ProductoVenta">
+      <End Role="Producto" EntitySet="Productos" />
+      <End Role="Venta" EntitySet="Ventas" />
+    </AssociationSet>
+    <AssociationSet Name="ProductoStock" Association="TiendaPModel.ProductoStock">
+      <End Role="Producto" EntitySet="Productos" />
+      <End Role="Stock" EntitySet="Stocks" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="PedidoVenta">
+    <End Type="TiendaPModel.Pedido" Role="Pedido" Multiplicity="1" />
+    <End Type="TiendaPModel.Venta" Role="Venta" Multiplicity="*" />
+  </Association>
+  <Association Name="ProductoVenta">
+    <End Type="TiendaPModel.Producto" Role="Producto" Multiplicity="1" />
+    <End Type="TiendaPModel.Venta" Role="Venta" Multiplicity="*" />
+  </Association>
+  <Association Name="ProductoStock">
+    <End Type="TiendaPModel.Producto" Role="Producto" Multiplicity="1" />
+    <End Type="TiendaPModel.Stock" Role="Stock" Multiplicity="*" />
+  </Association>
+</Schema>
