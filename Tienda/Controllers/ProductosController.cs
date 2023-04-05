@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml.Linq;
 using Tienda.Models;
 
 namespace Tienda.Controllers
@@ -21,6 +22,7 @@ namespace Tienda.Controllers
         }
 
         // GET: Productos/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -35,6 +37,7 @@ namespace Tienda.Controllers
             return View(producto);
         }
 
+        [Authorize]
         // GET: Productos/Create
         public ActionResult Create()
         {
@@ -46,6 +49,7 @@ namespace Tienda.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Include = "Id,Nombre,Descripcion,Cantidad,Precio,Imagen")] Producto producto)
         {
             if (ModelState.IsValid)
@@ -59,6 +63,7 @@ namespace Tienda.Controllers
         }
 
         // GET: Productos/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -78,6 +83,7 @@ namespace Tienda.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "Id,Nombre,Descripcion,Cantidad,Precio,Imagen")] Producto producto)
         {
             if (ModelState.IsValid)
@@ -90,6 +96,7 @@ namespace Tienda.Controllers
         }
 
         // GET: Productos/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -107,6 +114,7 @@ namespace Tienda.Controllers
         // POST: Productos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             Producto producto = db.Productos.Find(id);
@@ -114,6 +122,7 @@ namespace Tienda.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        [Authorize]
 
         protected override void Dispose(bool disposing)
         {
@@ -126,12 +135,20 @@ namespace Tienda.Controllers
 
         public ActionResult AddCarrito(int id, CarritoCompra cc)
         {
+            Producto producto = db.Productos.Find(id);
 
-            if (db != null)
+
+            var productoEnCarrito = cc.FirstOrDefault(p => p.Id == id);
+
+            if (productoEnCarrito != null)
             {
-                cc.Add(db.Productos.Find(id));
+                productoEnCarrito.Cantidad++;
             }
-
+            else
+            {
+                producto.Cantidad = 1;
+                cc.Add(producto);
+            }
             return RedirectToAction("Index");
         }
     }

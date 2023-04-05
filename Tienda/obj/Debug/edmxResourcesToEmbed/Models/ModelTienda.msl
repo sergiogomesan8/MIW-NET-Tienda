@@ -28,7 +28,6 @@
         <MappingFragment StoreEntitySet="Stocks">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="ReStock" ColumnName="ReStock" />
-          <ScalarProperty Name="ProductoId" ColumnName="ProductoId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

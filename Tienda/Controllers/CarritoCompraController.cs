@@ -20,27 +20,70 @@ namespace Tienda.Controllers
 
         public ActionResult VolcarCarrito(CarritoCompra cc)
         {
-
+            Pedido pedido = new Pedido();
             foreach (Producto producto in cc)
             {
                 if (producto.Cantidad > 0)
                 {
-                    Pedido pedido = new Pedido();
                     pedido.Id = producto.Id;
                     // TODO cantidad
                     pedido.NombreCliente = User.Identity.Name;
                     pedido.FechaCompra = DateTime.Now;
+                    pedido.Importe = pedido.Importe + (producto.Cantidad * producto.Precio);
 
-                    db.Pedidos.Add(pedido);
-                    Producto prod = db.Productos.Find(producto.Id);
-                    prod.Cantidad--;
+                    Producto produdctoDb = db.Productos.Find(producto.Id);
+                    produdctoDb.Cantidad -= producto.Cantidad;
+                    if (produdctoDb.Cantidad <= 2)
+                    {
+                        Stock stock = new Stock();
+                        stock.ReStock = false;
+                        stock.Producto = produdctoDb;
+                        db.Stocks.Add(stock);
+                    }
                 }
             }
 
-            cc.Clear();
+            db.Pedidos.Add(pedido);
             db.SaveChanges();
-
+            cc.Clear();
             return RedirectToAction("Index", "Productos");
+        }
+
+        public ActionResult Remove(int id, CarritoCompra cc)
+        {
+            Producto producto = new Producto();
+            foreach (var p in cc)
+            {
+                if (p.Id == id)
+                    producto = p;
+            }
+            producto.Cantidad--;
+            if(producto.Cantidad <= 0)
+            {
+                cc.Remove(producto);
+            }
+            return RedirectToAction("Index");
+        }
+        public ActionResult RemoveAll(int id, CarritoCompra cc)
+        {
+            List<Producto> productos = new List<Producto>();
+            foreach (var p in cc)
+            {
+                if (p.Id == id)
+                    productos.Add(p);
+            }
+            foreach (Producto p in productos)
+                cc.Remove(p);
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

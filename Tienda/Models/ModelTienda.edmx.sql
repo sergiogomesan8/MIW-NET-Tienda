@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/21/2023 18:57:12
+-- Date Created: 04/05/2023 15:11:45
 -- Generated from EDMX file: C:\Users\sergi\source\repos\Tienda\Tienda\Models\ModelTienda.edmx
 -- --------------------------------------------------
 
@@ -63,7 +63,6 @@ GO
 CREATE TABLE [dbo].[Stocks] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [ReStock] bit  NOT NULL,
-    [ProductoId] int  NOT NULL,
     [Producto_Id] int  NOT NULL
 );
 GO

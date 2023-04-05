@@ -29,7 +29,6 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ReStock" Type="Boolean" Nullable="false" />
-    <Property Name="ProductoId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Producto" Relationship="TiendaPModel.ProductoStock" FromRole="Stock" ToRole="Producto" />
   </EntityType>
   <EntityType Name="Venta">
@@ -49,12 +48,12 @@
     <EntitySet Name="Stocks" EntityType="Self.Stock" />
     <EntitySet Name="Ventas" EntityType="Self.Venta" />
     <AssociationSet Name="PedidoVenta" Association="TiendaPModel.PedidoVenta">
-      <End Role="Pedido" EntitySet="Pedidos" />
-      <End Role="Venta" EntitySet="Ventas" />
+      <End EntitySet="Pedidos" Role="Pedido" />
+      <End EntitySet="Ventas" Role="Venta" />
     </AssociationSet>
     <AssociationSet Name="ProductoVenta" Association="TiendaPModel.ProductoVenta">
-      <End Role="Producto" EntitySet="Productos" />
-      <End Role="Venta" EntitySet="Ventas" />
+      <End EntitySet="Productos" Role="Producto" />
+      <End EntitySet="Ventas" Role="Venta" />
     </AssociationSet>
     <AssociationSet Name="ProductoStock" Association="TiendaPModel.ProductoStock">
       <End Role="Producto" EntitySet="Productos" />
@@ -62,12 +61,12 @@
     </AssociationSet>
   </EntityContainer>
   <Association Name="PedidoVenta">
-    <End Type="TiendaPModel.Pedido" Role="Pedido" Multiplicity="1" />
-    <End Type="TiendaPModel.Venta" Role="Venta" Multiplicity="*" />
+    <End Type="TiendaPModel.Pedido" Multiplicity="1" Role="Pedido" />
+    <End Type="TiendaPModel.Venta" Multiplicity="*" Role="Venta" />
   </Association>
   <Association Name="ProductoVenta">
-    <End Type="TiendaPModel.Producto" Role="Producto" Multiplicity="1" />
-    <End Type="TiendaPModel.Venta" Role="Venta" Multiplicity="*" />
+    <End Type="TiendaPModel.Producto" Multiplicity="1" Role="Producto" />
+    <End Type="TiendaPModel.Venta" Multiplicity="*" Role="Venta" />
   </Association>
   <Association Name="ProductoStock">
     <End Type="TiendaPModel.Producto" Role="Producto" Multiplicity="1" />

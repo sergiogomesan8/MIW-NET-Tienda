@@ -27,7 +27,7 @@ namespace Tienda.Models
     
         public virtual DbSet<Pedido> Pedidos { get; set; }
         public virtual DbSet<Producto> Productos { get; set; }
-        public virtual DbSet<Stock> Stocks { get; set; }
         public virtual DbSet<Venta> Ventas { get; set; }
+        public virtual DbSet<Stock> Stocks { get; set; }
     }
 }

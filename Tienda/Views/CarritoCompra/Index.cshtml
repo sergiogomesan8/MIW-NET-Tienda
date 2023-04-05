@@ -1,14 +1,10 @@
 ﻿@model IEnumerable<Tienda.Models.Producto>
 
 @{
-    ViewBag.Title = "View";
+    ViewBag.Title = "Shopping Cart";
 }
 
 <h2>View</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -55,5 +51,7 @@
             </td>
         </tr>
     }
-
 </table>
+<p>
+    @Html.ActionLink("Place Order", "VolcarCarrito")
+</p>
