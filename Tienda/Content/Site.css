@@ -9,8 +9,8 @@
     padding-right: 15px;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
+/* Override the default bootstrap behavior where horizontal description lists
+will truncate terms that are too long to fit in the left column
 */
 .dl-horizontal dt {
     white-space: normal;
@@ -23,14 +23,43 @@ textarea {
     max-width: 280px;
 }
 
-.navbar-inverse .navbar-toggle:hover,
-.navbar-inverse .navbar-toggle:focus {
-    background-color: #777;
-    border-color: #fff
+/* Navbar color */
+.navbar-inverse {
+    background-color: #cfe7d8;
+    border-color: #cfe7d8;
 }
 
+    .navbar-inverse .navbar-nav > li > a {
+        color: #444;
+    }
 
-.image {
+        .navbar-inverse .navbar-nav > li > a:hover,
+        .navbar-inverse .navbar-nav > li > a:focus {
+            color: #fff;
+            background-color: #8dc63f;
+        }
+
+    .navbar-inverse .navbar-brand {
+        color: #444;
+    }
+
+        .navbar-inverse .navbar-brand:hover,
+        .navbar-inverse .navbar-brand:focus {
+            color: #fff;
+        }
+
+    .navbar-inverse .navbar-toggle {
+        border-color: #fff;
+    }
+
+        .navbar-inverse .navbar-toggle:hover,
+        .navbar-inverse .navbar-toggle:focus {
+            background-color: #8dc63f;
+            border-color: #fff;
+        }
+
+/* Navbar image */
+.navbar-brand .image {
     height: 60px;
     width: 60px;
 }

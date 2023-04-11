@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -36,8 +37,8 @@ namespace Tienda.Controllers
                     if (produdctoDb.Cantidad <= 2)
                     {
                         Stock stock = new Stock();
+                        stock.Productos = produdctoDb;
                         stock.ReStock = false;
-                        stock.Producto = produdctoDb;
                         db.Stocks.Add(stock);
                     }
                 }
@@ -45,6 +46,7 @@ namespace Tienda.Controllers
 
             db.Pedidos.Add(pedido);
             db.SaveChanges();
+
             cc.Clear();
             return RedirectToAction("Index", "Productos");
         }

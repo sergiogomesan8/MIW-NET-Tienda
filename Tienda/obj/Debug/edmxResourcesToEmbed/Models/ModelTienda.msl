@@ -23,14 +23,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Stocks">
-      <EntityTypeMapping TypeName="IsTypeOf(TiendaPModel.Stock)">
-        <MappingFragment StoreEntitySet="Stocks">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="ReStock" ColumnName="ReStock" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Ventas">
       <EntityTypeMapping TypeName="IsTypeOf(TiendaPModel.Venta)">
         <MappingFragment StoreEntitySet="Ventas">
@@ -41,25 +33,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="PedidoVenta" TypeName="TiendaPModel.PedidoVenta" StoreEntitySet="Ventas">
-      <EndProperty Name="Pedido">
-        <ScalarProperty Name="Id" ColumnName="Pedido_Id" />
-      </EndProperty>
-      <EndProperty Name="Venta">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="ProductoVenta" TypeName="TiendaPModel.ProductoVenta" StoreEntitySet="Ventas">
-      <EndProperty Name="Producto">
-        <ScalarProperty Name="Id" ColumnName="Producto_Id" />
-      </EndProperty>
-      <EndProperty Name="Venta">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
+    <EntitySetMapping Name="Stocks">
+      <EntityTypeMapping TypeName="IsTypeOf(TiendaPModel.Stock)">
+        <MappingFragment StoreEntitySet="Stocks">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ReStock" ColumnName="ReStock" />
+          <ScalarProperty Name="ProductoId" ColumnName="ProductoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="ProductoStock" TypeName="TiendaPModel.ProductoStock" StoreEntitySet="Stocks">
       <EndProperty Name="Producto">
-        <ScalarProperty Name="Id" ColumnName="Producto_Id" />
+        <ScalarProperty Name="Id" ColumnName="Productos_Id" />
       </EndProperty>
       <EndProperty Name="Stock">
         <ScalarProperty Name="Id" ColumnName="Id" />

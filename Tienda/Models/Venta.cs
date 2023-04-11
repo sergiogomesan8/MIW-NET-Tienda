@@ -18,8 +18,5 @@ namespace Tienda.Models
         public int Cantidad { get; set; }
         public string PedidoId { get; set; }
         public string ProductoId { get; set; }
-    
-        public virtual Pedido Pedido { get; set; }
-        public virtual Producto Producto { get; set; }
     }
 }

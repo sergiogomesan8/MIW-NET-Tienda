@@ -4,7 +4,9 @@
     ViewBag.Title = "Shopping Cart";
 }
 
-<h2>View</h2>
+<link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+
+<h2>Shopping Cart</h2>
 <table class="table">
     <tr>
         <th>
@@ -52,6 +54,14 @@
         </tr>
     }
 </table>
+<h4>
+    @{double importe = 0; }
+    @foreach (var item in Model)
+    {
+        importe += item.Cantidad * item.Precio;
+    }
+    Total: @importe €
+</h4>
 <p>
     @Html.ActionLink("Place Order", "VolcarCarrito")
 </p>

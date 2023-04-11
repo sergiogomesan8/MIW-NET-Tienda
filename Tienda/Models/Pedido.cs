@@ -14,18 +14,9 @@ namespace Tienda.Models
     
     public partial class Pedido
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Pedido()
-        {
-            this.Ventas = new HashSet<Venta>();
-        }
-    
         public int Id { get; set; }
         public double Importe { get; set; }
         public string NombreCliente { get; set; }
         public System.DateTime FechaCompra { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Venta> Ventas { get; set; }
     }
 }

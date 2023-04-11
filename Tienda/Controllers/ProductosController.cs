@@ -137,9 +137,7 @@ namespace Tienda.Controllers
         {
             Producto producto = db.Productos.Find(id);
 
-
             var productoEnCarrito = cc.FirstOrDefault(p => p.Id == id);
-
             if (productoEnCarrito != null)
             {
                 productoEnCarrito.Cantidad++;

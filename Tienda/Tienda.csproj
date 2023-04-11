@@ -212,6 +212,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelTienda.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Metadata\ProductoMetadata.cs" />
+    <Compile Include="Models\PartialClasses\Producto.cs" />
     <Compile Include="Models\Pedido.cs">
       <DependentUpon>ModelTienda.tt</DependentUpon>
     </Compile>
@@ -278,8 +280,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -307,11 +307,6 @@
     <Content Include="Views\Productos\Edit.cshtml" />
     <Content Include="Views\Productos\Index.cshtml" />
     <Content Include="Views\Pedidos\Index.cshtml" />
-    <Content Include="Views\Stocks\Create.cshtml" />
-    <Content Include="Views\Stocks\Delete.cshtml" />
-    <Content Include="Views\Stocks\Details.cshtml" />
-    <Content Include="Views\Stocks\Edit.cshtml" />
-    <Content Include="Views\Stocks\Index.cshtml" />
     <Content Include="Views\CarritoCompra\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
