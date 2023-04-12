@@ -8,6 +8,7 @@
     <Property Name="Importe" Type="Double" Nullable="false" />
     <Property Name="NombreCliente" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="FechaCompra" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Ventas" Relationship="TiendaPModel.PedidoVenta" FromRole="Pedido" ToRole="Venta" />
   </EntityType>
   <EntityType Name="Producto">
     <Key>
@@ -19,7 +20,6 @@
     <Property Name="Cantidad" Type="Int32" Nullable="false" />
     <Property Name="Precio" Type="Double" Nullable="false" />
     <Property Name="Imagen" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="Stocks" Relationship="TiendaPModel.ProductoStock" FromRole="Producto" ToRole="Stock" />
   </EntityType>
   <EntityType Name="Venta">
     <Key>
@@ -28,16 +28,17 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Cantidad" Type="Int32" Nullable="false" />
     <Property Name="PedidoId" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
-    <Property Name="ProductoId" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="ProductoId" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" Type="String" />
+    <NavigationProperty Name="Pedido" Relationship="TiendaPModel.PedidoVenta" FromRole="Venta" ToRole="Pedido" />
   </EntityType>
   <EntityContainer Name="TiendaEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Pedidos" EntityType="Self.Pedido" />
     <EntitySet Name="Productos" EntityType="Self.Producto" />
     <EntitySet Name="Ventas" EntityType="Self.Venta" />
     <EntitySet Name="Stocks" EntityType="TiendaPModel.Stock" />
-    <AssociationSet Name="ProductoStock" Association="TiendaPModel.ProductoStock">
-      <End Role="Producto" EntitySet="Productos" />
-      <End Role="Stock" EntitySet="Stocks" />
+    <AssociationSet Name="PedidoVenta" Association="TiendaPModel.PedidoVenta">
+      <End Role="Pedido" EntitySet="Pedidos" />
+      <End Role="Venta" EntitySet="Ventas" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Stock">
@@ -46,11 +47,9 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ReStock" Type="Boolean" Nullable="false" />
-    <Property Name="ProductoId" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Productos" Relationship="TiendaPModel.ProductoStock" FromRole="Stock" ToRole="Producto" />
   </EntityType>
-  <Association Name="ProductoStock">
-    <End Type="TiendaPModel.Producto" Role="Producto" Multiplicity="1" />
-    <End Type="TiendaPModel.Stock" Role="Stock" Multiplicity="*" />
+  <Association Name="PedidoVenta">
+    <End Type="TiendaPModel.Pedido" Role="Pedido" Multiplicity="1" />
+    <End Type="TiendaPModel.Venta" Role="Venta" Multiplicity="*" />
   </Association>
 </Schema>

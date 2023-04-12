@@ -16,8 +16,5 @@ namespace Tienda.Models
     {
         public int Id { get; set; }
         public bool ReStock { get; set; }
-        public int ProductoId { get; set; }
-    
-        public virtual Producto Productos { get; set; }
     }
 }

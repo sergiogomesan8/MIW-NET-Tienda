@@ -5,9 +5,9 @@
     <EntitySet Name="Productos" EntityType="TiendaPModel.Store.Productos" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Ventas" EntityType="TiendaPModel.Store.Ventas" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Stocks" EntityType="TiendaPModel.Store.Stocks" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="ProductoStock" Association="TiendaPModel.Store.ProductoStock">
-      <End Role="Producto" EntitySet="Productos" />
-      <End Role="Stock" EntitySet="Stocks" />
+    <AssociationSet Name="PedidoVenta" Association="TiendaPModel.Store.PedidoVenta">
+      <End Role="Pedido" EntitySet="Pedidos" />
+      <End Role="Venta" EntitySet="Ventas" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Pedidos">
@@ -38,6 +38,7 @@
     <Property Name="Cantidad" Type="int" Nullable="false" />
     <Property Name="PedidoId" Type="nchar" Nullable="false" MaxLength="20" />
     <Property Name="ProductoId" Type="nchar" Nullable="false" MaxLength="20" />
+    <Property Name="Pedido_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Stocks">
     <Key>
@@ -45,18 +46,16 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ReStock" Type="bit" Nullable="false" />
-    <Property Name="ProductoId" Type="int" Nullable="false" />
-    <Property Name="Productos_Id" Type="int" Nullable="false" />
   </EntityType>
-  <Association Name="ProductoStock">
-    <End Role="Producto" Type="TiendaPModel.Store.Productos" Multiplicity="1" />
-    <End Role="Stock" Type="TiendaPModel.Store.Stocks" Multiplicity="*" />
+  <Association Name="PedidoVenta">
+    <End Role="Pedido" Type="TiendaPModel.Store.Pedidos" Multiplicity="1" />
+    <End Role="Venta" Type="TiendaPModel.Store.Ventas" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Producto">
+      <Principal Role="Pedido">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Stock">
-        <PropertyRef Name="Productos_Id" />
+      <Dependent Role="Venta">
+        <PropertyRef Name="Pedido_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

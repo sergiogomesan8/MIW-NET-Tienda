@@ -38,15 +38,14 @@
         <MappingFragment StoreEntitySet="Stocks">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="ReStock" ColumnName="ReStock" />
-          <ScalarProperty Name="ProductoId" ColumnName="ProductoId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="ProductoStock" TypeName="TiendaPModel.ProductoStock" StoreEntitySet="Stocks">
-      <EndProperty Name="Producto">
-        <ScalarProperty Name="Id" ColumnName="Productos_Id" />
+    <AssociationSetMapping Name="PedidoVenta" TypeName="TiendaPModel.PedidoVenta" StoreEntitySet="Ventas">
+      <EndProperty Name="Pedido">
+        <ScalarProperty Name="Id" ColumnName="Pedido_Id" />
       </EndProperty>
-      <EndProperty Name="Stock">
+      <EndProperty Name="Venta">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>

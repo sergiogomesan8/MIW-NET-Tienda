@@ -37,7 +37,7 @@ namespace Tienda.Controllers
                     if (produdctoDb.Cantidad <= 2)
                     {
                         Stock stock = new Stock();
-                        stock.Productos = produdctoDb;
+                        //stock.Producto = produdctoDb;
                         stock.ReStock = false;
                         db.Stocks.Add(stock);
                     }
